@@ -1,11 +1,15 @@
 const swaggerAutogen = require('swagger-autogen')();
+const dotenv = require('dotenv');
+dotenv.config();
+
+const isDev = process.env.NODE_ENV !== 'production';
 
 const doc = {
   info: {
     title: 'Book Library API',
     description: 'API for managing a book library',
   },
-  host: 'localhost:8080',
+  host: isDev ? `localhost:${process.env.PORT}` : 'cse341-mark.onrender.com',
   schemes: ['http'],
 };
 
