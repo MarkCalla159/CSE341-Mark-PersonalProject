@@ -1,12 +1,10 @@
 ### Get all books
 GET https://cse341-mark-personalproject.onrender.com/books
-Accept: application/json
 
 ###
 
 ### Get a single book by ID (replace `:id` with a real ID)
-GET https://cse341-mark-personalproject.onrender.com/books/:id
-Accept: application/json
+GET https://cse341-mark-personalproject.onrender.com/books/683230e4a58a99fcbb77a436
 
 ###
 
@@ -47,13 +45,11 @@ DELETE https://cse341-mark-personalproject.onrender.com/books/:id
 
 ### Get all books
 GET http://localhost:8080/books
-Accept: application/json
 
 ###
 
 ### Get a single book by ID (replace :id with a real MongoDB ID)
 GET http://localhost:8080/books/:id
-Accept: application/json
 
 ###
 
@@ -74,7 +70,7 @@ Content-Type: application/json
 ###
 
 ### Update a book by ID (replace :id with a real MongoDB ID)
-PUT http://localhost:8080/books/:id
+PUT http://localhost:8080/books/683254f10d39dfe8c81b5ede
 Content-Type: application/json
 
 {
@@ -82,7 +78,7 @@ Content-Type: application/json
   "author": "J.R.R. Tolkien",
   "genre": "Fantasy",
   "publishedYear": 1937,
-  "summary": "Updated summary for the hobbit.",
+  "summary": "Actually this book has 3 movies",
   "pages": 320,
   "publisher": "George Allen & Unwin"
 }
@@ -90,4 +86,4 @@ Content-Type: application/json
 ###
 
 ### Delete a book by ID (replace :id with a real MongoDB ID)
-DELETE http://localhost:8080/books/:id
+DELETE http://localhost:8080/books/683254f10d39dfe8c81b5ede
