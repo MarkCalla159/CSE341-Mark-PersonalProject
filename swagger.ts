@@ -10,7 +10,7 @@ const doc = {
     description: 'API for managing a book library',
   },
   host: 'cse341-mark-personalproject.onrender.com',
-  schemes: isDev ? ['http'] : ['https'],
+  schemes: ['https']
 };
 
 const outputFile = './swagger.json';
