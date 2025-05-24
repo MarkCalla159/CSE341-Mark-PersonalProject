@@ -1,0 +1,40 @@
+{
+  "name": "personalproject",
+  "version": "1.0.0",
+  "main": "server.ts",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node dist/server.js",
+    "build": "tsc",
+    "dev": "ts-node ./server.ts",
+    "watch": "tsc -w",
+    "swagger": "node dist/swagger.js"
+  },
+  "keywords": [],
+  "author": "Mark Calla",
+  "license": "ISC",
+  "dependencies": {
+    "dotenv": "^16.5.0",
+    "express": "^5.1.0",
+    "mongoose": "^8.15.0",
+    "swagger-autogen": "^2.23.7",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.2",
+    "@types/node": "^22.15.21",
+    "@types/swagger-ui-express": "^4.1.8",
+    "ts-node": "^10.9.2",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.8.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarkCalla159/CSE341-Mark-PersonalProject.git"
+  },
+  "bugs": {
+    "url": "https://github.com/MarkCalla159/CSE341-Mark-PersonalProject/issues"
+  },
+  "homepage": "https://github.com/MarkCalla159/CSE341-Mark-PersonalProject.#readme",
+  "description": ""
+}
