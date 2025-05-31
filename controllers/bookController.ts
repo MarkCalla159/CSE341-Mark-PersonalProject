@@ -2,6 +2,9 @@ import { Request, Response, NextFunction } from 'express';
 import { ObjectId } from 'mongodb';
 import connectdb from '../database/connectdb';
 
+import { Book } from '../interfaces/books';
+import { validateBook } from '../utilities/validateBook';
+/* This will be add in models to validate UPDATE and CREATE
 interface Book {
   title: string;
   author: string;
@@ -10,7 +13,7 @@ interface Book {
   summary: string;
   pages: number;
   publisher: string;
-}
+}*/
 /******************************************
  * All Books
  *******************************************/
@@ -49,7 +52,24 @@ const getBookById = async (req: Request, res: Response, next: NextFunction) => {
  * Create a new Book
  *******************************************/
 const createBook = async (req: Request, res: Response, next: NextFunction) => {
-  try {
+   try {
+    const errors = validateBook(req.body);
+    if (errors.length > 0) {
+      return res.status(400).json({ message: 'Validation failed', errors });
+    }
+
+    const book: Book = req.body;
+    const response = await connectdb.getDb().db().collection('books').insertOne(book);
+    if (response.acknowledged) {
+      res.status(201).json({ message: 'Book created', bookId: response.insertedId });
+    } else {
+      res.status(500).json({ message: 'Failed to create book' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Error creating book', error });
+  }
+}; //this is giving me this error routes/booksRoutes.ts:14:18 - error TS2769: No overload matches this call. 
+  /*try {
     const book: Book = {
       title: req.body.title,
       author: req.body.author,
@@ -67,14 +87,14 @@ const createBook = async (req: Request, res: Response, next: NextFunction) => {
     }
   } catch (error) {
     res.status(500).json({ message: 'Error creating book', error });
-  }
-};
+  }*/
+
 
 /******************************************
  * Update a Book
  *******************************************/
 const updateBook = async (req: Request, res: Response, next: NextFunction) => {
-  try {
+  /*try {
     const bookId = new ObjectId(req.params.id);
     const book: Book = {
       title: req.body.title,
@@ -93,6 +113,34 @@ const updateBook = async (req: Request, res: Response, next: NextFunction) => {
     }
   } catch (error) {
     res.status(400).json({ message: 'Invalid book ID or error updating book', error });
+  }*/
+ try {
+    const bookId = req.params.id;
+
+    // Validate ObjectId format
+    if (!ObjectId.isValid(bookId)) {
+      return res.status(400).json({ message: 'Invalid book ID format' });
+    }
+
+    // Validate the request body
+    const errors = validateBook(req.body);
+    if (errors.length > 0) {
+      return res.status(400).json({ message: 'Validation failed', errors });
+    }
+
+    const updatedBook: Book = req.body;
+    const response = await connectdb.getDb().db().collection('books').replaceOne(
+      { _id: new ObjectId(bookId) },
+      updatedBook
+    );
+
+    if (response.modifiedCount > 0) {
+      res.status(200).json({ message: 'Book updated successfully' });
+    } else {
+      res.status(404).json({ message: 'Book not found or no changes made' });
+    }
+  } catch (error) {
+    res.status(500).json({ message: 'Error updating book', error });
   }
 };
 
@@ -102,14 +150,24 @@ const updateBook = async (req: Request, res: Response, next: NextFunction) => {
 const deleteBook = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const bookId = new ObjectId(req.params.id);
-    const response = await connectdb.getDb().db().collection('books').deleteOne({ _id: bookId });
-    if (response.deletedCount > 0) {
+    const response = await connectdb.getDb().db().collection('books').deleteOne({ _id: new ObjectId(bookId) });
+    /*if (response.deletedCount > 0) {
       res.status(204).send();
     } else {
       res.status(500).json({ message: 'Failed to delete book' });
     }
   } catch (error) {
     res.status(400).json({ message: 'Invalid book ID or error deleting book', error });
+  }*/
+    if (!ObjectId.isValid(bookId)) {
+      return res.status(400).json({ message: 'Invalid book ID format' });
+    } if (response.deletedCount === 0) {
+      return res.status(404).json({ message: 'Book not found' });
+    }
+      return res.status(204).send(); // No content, success
+  }
+  catch (error) {
+    return res.status(500).json({ message: 'Error deleting book', error });
   }
 };
 

@@ -5,9 +5,9 @@
     "description": "API for managing a book library",
     "version": "1.0.0"
   },
-  "host": "cse341-mark-personalproject.onrender.com",
+  "host": "cse341-mark.onrender.com",
   "basePath": "/",
-  "schemes": ["https"],
+  "schemes": ["http"],
   "consumes": ["application/json"],
   "produces": ["application/json"],
   "paths": {

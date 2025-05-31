@@ -9,7 +9,9 @@ const doc = {
     title: 'Book Library API',
     description: 'API for managing a book library',
   },
-  host: 'cse341-mark-personalproject.onrender.com',
+   host: isDev ? `localhost:${process.env.PORT}` : 'cse341-mark.onrender.com',
+  /*localhost:8080*/
+  /*cse341-mark-personalproject.onrender.com*/
   schemes: ['https']
 };
 
