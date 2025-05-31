@@ -1,5 +1,5 @@
 import express from 'express';
-import swaggerRoutes from './swaggerRoutes';
+//import swaggerRoutes from './swaggerRoutes';
 import booksRoutes from './booksRoutes';
 
 const router = express.Router();

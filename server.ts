@@ -14,9 +14,9 @@ app.use(bodyParser.json());
 app.use('/', router);
 app.use('/api-docs', swaggerRoutes);
 // Optional catch-all route or home route
-app.get('/', (req: Request, res: Response) => {
-  res.send('Welcome to API');
-});
+//app.get('/', (req: Request, res: Response) => {
+  //res.send('Welcome to API');
+//});
 // CORS headers middleware
 app.use((req: Request, res: Response, next: NextFunction) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
