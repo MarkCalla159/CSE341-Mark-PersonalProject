@@ -12,7 +12,7 @@ app.use(bodyParser.json());
 //app.use('/books', booksRoutes);
 //app.use('/api-docs', swaggerRoutes);
 app.use('/', router);
-app.use('/', swaggerRoutes);
+app.use('/api-docs', swaggerRoutes);
 // Optional catch-all route or home route
 app.get('/', (req: Request, res: Response) => {
   res.send('Welcome to API');
