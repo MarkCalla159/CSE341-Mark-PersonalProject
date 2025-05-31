@@ -2,7 +2,7 @@ import express, { Request, Response, NextFunction } from 'express';
 import bodyParser from 'body-parser';
 import router from './routes';
 //import booksRoutes from './routes/booksRoutes';
-//import swaggerRoutes from './routes/swaggerRoutes';
+import swaggerRoutes from './routes/swaggerRoutes';
 import connectdb from './database/connectdb';
 
 const app = express();
@@ -10,7 +10,7 @@ const port = process.env.PORT || 8080;
 app.use(bodyParser.json());
 //Routes
 //app.use('/books', booksRoutes);
-//app.use('/api-docs', swaggerRoutes);
+app.use('/', swaggerRoutes);
 app.use('/', router);
 // Optional catch-all route or home route
 //app.get('/', (req: Request, res: Response) => {
