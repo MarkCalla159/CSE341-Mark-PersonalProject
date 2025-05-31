@@ -7,14 +7,16 @@ import connectdb from './database/connectdb';
 
 const app = express();
 const port = process.env.PORT || 8080;
-// ✅ Use /books for the bookRoutes
-app.use('/books', booksRoutes);
-
-// ✅ Use /api-docs or similar for Swagger
-app.use('/api-docs', swaggerRoutes);
 app.use(bodyParser.json());
-app.use('/', router);
-app.use('/', swaggerRoutes);
+//Routes
+app.use('/books', booksRoutes);
+app.use('/api-docs', swaggerRoutes);
+//app.use('/', router);
+//app.use('/', swaggerRoutes);
+// Optional catch-all route or home route
+app.get('/', (req: Request, res: Response) => {
+  res.send('Welcome to API');
+});
 // CORS headers middleware
 app.use((req: Request, res: Response, next: NextFunction) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
