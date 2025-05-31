@@ -1,8 +1,8 @@
 import express, { Request, Response, NextFunction } from 'express';
 import bodyParser from 'body-parser';
 import router from './routes';
-import booksRoutes from './routes/booksRoutes';
-import swaggerRoutes from './routes/swaggerRoutes';
+//import booksRoutes from './routes/booksRoutes';
+//import swaggerRoutes from './routes/swaggerRoutes';
 import connectdb from './database/connectdb';
 
 const app = express();
@@ -12,7 +12,6 @@ app.use(bodyParser.json());
 //app.use('/books', booksRoutes);
 //app.use('/api-docs', swaggerRoutes);
 app.use('/', router);
-app.use('/api-docs', swaggerRoutes);
 // Optional catch-all route or home route
 //app.get('/', (req: Request, res: Response) => {
   //res.send('Welcome to API');
