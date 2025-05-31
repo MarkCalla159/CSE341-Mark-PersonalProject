@@ -55,7 +55,7 @@ const createBook = async (req: Request, res: Response, next: NextFunction) => {
    try {
     const errors = validateBook(req.body);
     if (errors.length > 0) {
-      return res.status(400).json({ message: 'Validation failed', errors });
+      return void res.status(400).json({ message: 'Validation failed', errors });
     }
 
     const book: Book = req.body;
@@ -119,13 +119,13 @@ const updateBook = async (req: Request, res: Response, next: NextFunction) => {
 
     // Validate ObjectId format
     if (!ObjectId.isValid(bookId)) {
-      return res.status(400).json({ message: 'Invalid book ID format' });
+      return void res.status(400).json({ message: 'Invalid book ID format' });
     }
 
     // Validate the request body
     const errors = validateBook(req.body);
     if (errors.length > 0) {
-      return res.status(400).json({ message: 'Validation failed', errors });
+      return void res.status(400).json({ message: 'Validation failed', errors });
     }
 
     const updatedBook: Book = req.body;
@@ -160,14 +160,14 @@ const deleteBook = async (req: Request, res: Response, next: NextFunction) => {
     res.status(400).json({ message: 'Invalid book ID or error deleting book', error });
   }*/
     if (!ObjectId.isValid(bookId)) {
-      return res.status(400).json({ message: 'Invalid book ID format' });
+      return void res.status(400).json({ message: 'Invalid book ID format' });
     } if (response.deletedCount === 0) {
-      return res.status(404).json({ message: 'Book not found' });
+      return void res.status(404).json({ message: 'Book not found' });
     }
-      return res.status(204).send(); // No content, success
+      return void res.status(204).send(); // No content, success
   }
   catch (error) {
-    return res.status(500).json({ message: 'Error deleting book', error });
+    return void res.status(500).json({ message: 'Error deleting book', error });
   }
 };
 
