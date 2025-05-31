@@ -1,12 +1,17 @@
 import express, { Request, Response, NextFunction } from 'express';
 import bodyParser from 'body-parser';
 import router from './routes';
+import booksRoutes from './routes/booksRoutes';
 import swaggerRoutes from './routes/swaggerRoutes';
 import connectdb from './database/connectdb';
 
 const app = express();
 const port = process.env.PORT || 8080;
+// ✅ Use /books for the bookRoutes
+app.use('/books', booksRoutes);
 
+// ✅ Use /api-docs or similar for Swagger
+app.use('/api-docs', swaggerRoutes);
 app.use(bodyParser.json());
 app.use('/', router);
 app.use('/', swaggerRoutes);
