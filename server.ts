@@ -9,10 +9,10 @@ const app = express();
 const port = process.env.PORT || 8080;
 app.use(bodyParser.json());
 //Routes
-app.use('/books', booksRoutes);
+//app.use('/books', booksRoutes);
 //app.use('/api-docs', swaggerRoutes);
-//app.use('/', router);
-//app.use('/', swaggerRoutes);
+app.use('/', router);
+app.use('/', swaggerRoutes);
 // Optional catch-all route or home route
 app.get('/', (req: Request, res: Response) => {
   res.send('Welcome to API');
