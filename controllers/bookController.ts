@@ -68,52 +68,12 @@ const createBook = async (req: Request, res: Response, next: NextFunction) => {
   } catch (error) {
     res.status(500).json({ message: 'Error creating book', error });
   }
-}; //this is giving me this error routes/booksRoutes.ts:14:18 - error TS2769: No overload matches this call. 
-  /*try {
-    const book: Book = {
-      title: req.body.title,
-      author: req.body.author,
-      genre: req.body.genre,
-      publishedYear: req.body.publishedYear,
-      summary: req.body.summary,
-      pages: req.body.pages,
-      publisher: req.body.publisher,
-    };
-    const response = await connectdb.getDb().db().collection('books').insertOne(book);
-    if (response.acknowledged) {
-      res.status(201).json(response);
-    } else {
-      res.status(500).json({ message: 'Failed to create book' });
-    }
-  } catch (error) {
-    res.status(500).json({ message: 'Error creating book', error });
-  }*/
-
+};
 
 /******************************************
  * Update a Book
  *******************************************/
 const updateBook = async (req: Request, res: Response, next: NextFunction) => {
-  /*try {
-    const bookId = new ObjectId(req.params.id);
-    const book: Book = {
-      title: req.body.title,
-      author: req.body.author,
-      genre: req.body.genre,
-      publishedYear: req.body.publishedYear,
-      summary: req.body.summary,
-      pages: req.body.pages,
-      publisher: req.body.publisher,
-    };
-    const response = await connectdb.getDb().db().collection('books').replaceOne({ _id: bookId }, book);
-    if (response.modifiedCount > 0) {
-      res.status(204).send();
-    } else {
-      res.status(500).json({ message: 'Failed to update book' });
-    }
-  } catch (error) {
-    res.status(400).json({ message: 'Invalid book ID or error updating book', error });
-  }*/
  try {
     const bookId = req.params.id;
 
@@ -151,14 +111,6 @@ const deleteBook = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const bookId = new ObjectId(req.params.id);
     const response = await connectdb.getDb().db().collection('books').deleteOne({ _id: new ObjectId(bookId) });
-    /*if (response.deletedCount > 0) {
-      res.status(204).send();
-    } else {
-      res.status(500).json({ message: 'Failed to delete book' });
-    }
-  } catch (error) {
-    res.status(400).json({ message: 'Invalid book ID or error deleting book', error });
-  }*/
     if (!ObjectId.isValid(bookId)) {
       return void res.status(400).json({ message: 'Invalid book ID format' });
     } if (response.deletedCount === 0) {

@@ -1,15 +1,17 @@
 import express, { Request, Response, NextFunction } from 'express';
 import bodyParser from 'body-parser';
 import router from './routes';
-//import booksRoutes from './routes/booksRoutes';
+import session from 'express-session';
+import passport from 'passport';
+import './auth/passport';
 import swaggerRoutes from './routes/swaggerRoutes';
 import connectdb from './database/connectdb';
+import authRoutes from './routes/authRoutes';
 
 const app = express();
 const port = process.env.PORT || 8080;
 app.use(bodyParser.json());
 //Routes
-//app.use('/books', booksRoutes);
 app.use('/', swaggerRoutes);
 app.use('/', router);
 // Optional catch-all route or home route
@@ -26,6 +28,17 @@ app.use((req: Request, res: Response, next: NextFunction) => {
   res.setHeader('Access-Control-Allow-Methods', 'GET, PUT, POST, DELETE, OPTIONS');
   next();
 });
+app.use(
+  session({
+    secret: process.env.SESSION_SECRET!,
+    resave: false,
+    saveUninitialized: false
+  })
+);
+app.use(passport.initialize());
+app.use(passport.session());
+
+app.use('/auth', authRoutes);
 
 // Initialize DB then start server
 connectdb.initDb((err: Error | null) => {
