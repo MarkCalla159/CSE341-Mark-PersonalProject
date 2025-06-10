@@ -21,7 +21,7 @@ passport.use(
     },
      (
       _accessToken: string,
-      _refreshToken: string, // ✅ prefixed with _ to silence unused warning
+      _refreshToken: string, // prefixed with _ to silence unused warning
       profile: Profile,
       done: (error: any, user?: any) => void
     ) => {
