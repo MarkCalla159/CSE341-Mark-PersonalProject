@@ -1,12 +1,14 @@
 import express from 'express';
-import passport from 'passport';
+import passport from '../auth/passport';
 
 const router = express.Router();
 
-router.get('/github', passport.authenticate('github', { scope: ['user:email'] }));
+// Start GitHub OAuth login
+router.get('/auth/github', passport.authenticate('github', { scope: ['user:email'] }));
 
+// Handle callback after GitHub authentication
 router.get(
-  '/github/callback',
+  '/auth/github/callback',
   passport.authenticate('github', { failureRedirect: '/' }),
   (req, res) => {
     res.redirect('/books'); // Redirect after successful login
@@ -14,7 +16,7 @@ router.get(
 );
 
 router.get('/logout', (req, res, next) => {
-  req.logout(err => {
+  req.logout((err) => {
     if (err) return next(err);
     res.redirect('/');
   });

@@ -12,12 +12,13 @@ const app = express();
 const port = process.env.PORT || 8080;
 app.use(bodyParser.json());
 //Routes
+app.use('/auth', authRoutes);
 app.use('/', swaggerRoutes);
 app.use('/', router);
 // Optional catch-all route or home route
-//app.get('/', (req: Request, res: Response) => {
-  //res.send('Welcome to API');
-//});
+app.get('/', (req: Request, res: Response) => {
+  res.send('Welcome to API');
+});
 // CORS headers middleware
 app.use((req: Request, res: Response, next: NextFunction) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -38,7 +39,6 @@ app.use(
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use('/auth', authRoutes);
 
 // Initialize DB then start server
 connectdb.initDb((err: Error | null) => {

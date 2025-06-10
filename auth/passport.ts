@@ -1,5 +1,8 @@
 import passport from 'passport';
 import { Strategy as GitHubStrategy, Profile } from 'passport-github2';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 passport.serializeUser((user: any, done) => {
   done(null, user);
@@ -17,7 +20,7 @@ passport.use(
       callbackURL: process.env.GITHUB_CALLBACK_URL!
     },
      (
-      accessToken: string,
+      _accessToken: string,
       _refreshToken: string, // ✅ prefixed with _ to silence unused warning
       profile: Profile,
       done: (error: any, user?: any) => void
@@ -26,3 +29,4 @@ passport.use(
     }
   )
 );
+export default passport;
