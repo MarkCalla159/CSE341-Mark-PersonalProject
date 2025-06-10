@@ -30,11 +30,11 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 app.use(
   session({
-    secret: process.env.SESSION_SECRET!, // Make sure this is defined
+    secret: process.env.SESSION_SECRET!, 
     resave: false,
     saveUninitialized: false,
     cookie: {
-      secure: process.env.NODE_ENV === 'production', // true in production (HTTPS), false in dev
+      secure: process.env.NODE_ENV === 'production', 
       maxAge: 1000 * 60 * 60 * 24 // 1 day
     }
   })
