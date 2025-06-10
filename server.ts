@@ -30,7 +30,7 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 });
 app.use(
   session({
-    secret: process.env.SESSION_SECRET!,
+    secret: process.env.SESSION_SECRET|| 'b31f2f74c7df875d9d168726407af0feab4b08b3cc999b202ecce71ac84abd4bb531228ed0e280dfccd228eeda87c4118d239c61eb6a59405b225fc723807b93',
     resave: false,
     saveUninitialized: false,
     cookie: {
