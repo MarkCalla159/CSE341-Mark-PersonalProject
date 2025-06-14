@@ -12,6 +12,7 @@ passport.deserializeUser((user: any, done) => {
   done(null, user);
 });
 
+// Set up GitHub OAuth
 passport.use(
   new GitHubStrategy(
     {

@@ -5,7 +5,7 @@ import authRoutes from './authRoutes';
 
 const router = express.Router();
 
-// Mount contacts routes at '/contacts'
+// Mount books routes at '/books'
 router.use('/books', booksRoutes);
 // Mount swagger routes at '/'
 router.use('/api-docs', swaggerRoutes);
